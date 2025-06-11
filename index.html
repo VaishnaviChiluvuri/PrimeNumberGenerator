@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            text-align: center ;
+            margin-top:140px;
+            background-color:rgba(252, 67, 252, 0.7);
+            
+        }
+        table{
+            border-collapse:collapse;
+            width:600px;
+            height:250px;
+            text-align:center;
+            margin-left:380px;
+        }
+        tr{
+            border:1px solid black;
+            padding-left:10px;
+        }
+
+        td{
+            border:1px solid black;
+            padding-left:10px;
+        }
+
+        #text{
+            text-align:center;
+            font-size:18px;
+            font-weight:bold;
+        }
+
+        #startNum{
+            height:30px;
+            width:300px;
+        }
+        #endNum{
+            height:30px;
+            width:300px;
+        }
+        #result{
+            height:80px;
+            width:300px;
+        }
+        button{
+            height:30px;
+            width:120px;
+            font-size:18px;
+        }
+    </style>
+</head>
+<body>
+    <h1> Prime Number Calculator</h1>
+        <table>
+            <tr>
+                <td id="text"> Start </td>
+                <td> <input type="number" id="startNum"> </td>
+            </tr>
+            <tr>
+                <td id="text"> End </td>
+                <td> <input type="number" id="endNum"> </td>
+            </tr>
+            <tr>
+                <td id="text"> Prime Numbers </td>
+                <td> <textarea id="result" readonly> </textarea></td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td> <button onclick="generatePrimes()">  Generate </button></td>
+            </tr>
+        </table>
+
+        <script>
+            let button=document.querySelector("button");
+            button.addEventListener("click",()=>{
+                button.style.backgroundColor="pink";
+            })
+            function isPrime(n){
+                if(n<2) return false;
+                for (let i=2;i<=Math.sqrt(n);i++){
+                    if(n%i===0){
+                        return false;
+                    }
+                }
+                return true;
+            }
+            function generatePrimes(){
+            let startNum=parseInt(document.querySelector("#startNum").value);
+            let endNum=parseInt(document.querySelector("#endNum").value);
+            let result=document.querySelector("#result");
+
+            if (isNaN(startNum) || isNaN(endNum) || startNum > endNum) {
+                result.value="Please enter valid start and end number";
+                return;
+            }
+            let primes=[];
+            for (let i=startNum;i<=endNum;i++){
+            if(isPrime(i)){
+                primes.push(i);
+            }
+        }
+            if(primes.length>0){
+                result.value=primes.join(", ");
+            }
+            else{
+                result.value="No primes found between the given number.";
+            } 
+        }
+        </script>
+
+</body>
+</html>
